@@ -1,0 +1,13 @@
+{
+"agent_id": "agent-sre-01",
+"agent_role": "sre-agent",
+"target_env": "production",
+"action_payload": {
+"action": "cloudwatch:GetMetricData",
+"command": "aws cloudwatch get-metric-data --metric-name CPUUtilization"
+},
+"context": {
+"reasoning": "Investigating high CPU alert on checkout service.",
+"security_approved": false
+}
+}

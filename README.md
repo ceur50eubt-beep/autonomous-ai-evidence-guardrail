@@ -1,7 +1,7 @@
 # Autonomous AI Evidence Guardrail
 > **Policy-as-Code & Evidence-as-Code for Autonomous AI Agents**
 
-[![Verify & Policy Test](https://github.com/YOUR_GITHUB_USERNAME/autonomous-ai-evidence-guardrail/actions/workflows/verify_and_test.yml/badge.svg)](https://github.com/YOUR_GITHUB_USERNAME/autonomous-ai-evidence-guardrail/actions/workflows/verify_and_test.yml)
+[![Verify & Policy Test](https://github.com/ceur50eubt-beep/autonomous-ai-evidence-guardrail/actions/workflows/verify_and_test.yml/badge.svg)](https://github.com/ceur50eubt-beep/autonomous-ai-evidence-guardrail/actions/workflows/verify_and_test.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 An enterprise-grade safety gateway that enforces real-time **Policy-as-Code (OPA/Rego)** and immutable **Evidence-as-Code (AWS KMS + S3 Object Lock)** for autonomous AI agents (MCP / tool-use APIs) before executing critical infrastructure or database operations.

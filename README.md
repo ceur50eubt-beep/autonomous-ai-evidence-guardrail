@@ -43,6 +43,7 @@ As enterprises adopt autonomous AI agents (e.g., Anthropic MCP, LangChain / Lang
                  │
                  └──▶ [ Execution Target ] (AWS Infrastructure / Database)
 ```
+
 ---
 
 ## 3. Key Design Highlights
@@ -92,3 +93,64 @@ autonomous-ai-evidence-guardrail/
 └── .github/
     └── workflows/
         └── verify_and_test.yml        # CI Pipeline (Rego test & Terraform fmt/validate)
+```
+
+---
+
+## 5. Quickstart & Demonstration
+
+### Prerequisites
+* Terraform >= 1.5.0
+* Open Policy Agent (`opa`) CLI
+* Python 3.10+
+* AWS CLI configured
+
+### 1. Run Policy Unit Tests
+```bash
+opa test ./policies -v
+```
+
+### 2. Simulate AI Agent Attack & Automated Defense
+Execute the end-to-end simulation script:
+```bash
+chmod +x ./scripts/simulate_agent_attack.sh
+./scripts/simulate_agent_attack.sh
+```
+
+**Execution Output:**
+```text
+============================================================
+ [DEMO] Autonomous AI Agent Guardrail & Evidence Simulation 
+============================================================
+
+[1] Testing SAFE Request (Read-only CloudWatch Metric)...
+==================================================
+[*] Request Processed: agent-sre-01
+[*] Decision         : ALLOW
+[*] Ephemeral Token  : Issued (TTL: 900s)
+[*] Assumed Session  : ai-session-b1d68495
+[*] KMS Signature    : KMS_SIG_RSA_SHA256_983a591d50f12694dea8cd7ecf44053b
+[SUCCESS] Execution Permitted.
+==================================================
+
+[2] Testing MALICIOUS Request (Destructive DROP TABLE in Production)...
+==================================================
+[*] Request Processed: agent-sre-01
+[*] Decision         : DENY
+[!] Deny Reason      : ["Destructive command prohibited in production environment (Fallback OPA)"]
+[*] SHA-256 Digest   : 3d4e240e76fbea5461f268f081853db3c2521e9ef4fabd94e0a9c1255f26e8d8
+[*] KMS Signature    : KMS_SIG_RSA_SHA256_f5c0215b423c1c19ad8e70628682f4a8
+[!] Execution Intercepted & Blocked.
+==================================================
+
+============================================================
+ [SUCCESS] Guardrail validation completed successfully!     
+============================================================
+```
+
+---
+
+## 6. SRE & Compliance Takeaways
+
+* **Toil Elimination**: Automates manual audit gathering and change approval boards (CAB) into continuous, programmatic evidence generation.
+* **Defense in Depth**: Zero trust approach tailored for autonomous workflows where non-human actors operate at high velocity.
